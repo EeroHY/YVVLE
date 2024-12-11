@@ -1,0 +1,28 @@
+# Use postgres/example user/password credentials
+services:
+
+  db:
+    image: postgres
+    # set shared memory limit when using docker-compose
+    shm_size: 128mb
+    network_mode: "host"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: yvvle
+
+  adminer:
+    network_mode: "host"
+    image: adminer
+
+  poetry:
+    network_mode: "host"
+    image: YVVLE/poetry
+    volumes:
+      - ./:/mydir
+    stdin_open: true
+    tty: true
+    depends_on:
+      db:
+        condition: service_started
+        restart: true

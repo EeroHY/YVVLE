@@ -43,12 +43,6 @@ def print_db():
 
 def setup_db():
     for table_name in table_names:
-        if table_exists(table_name):
-            print(f"Table {table_name} exists, dropping")
-            sql = text(f"DROP TABLE {table_name}")
-            db.session.execute(sql)
-            db.session.commit()
-
         print(f"Creating table {table_name}")
 
         if table_name == "inproceedings":
